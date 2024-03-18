@@ -3,8 +3,10 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-	{
-	    "nvim-telescope/telescope-file-browser.nvim",
-	    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-	}
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    },
+    require 'custom.plugins.hover',
+    require 'custom.plugins.autoclose'
 }

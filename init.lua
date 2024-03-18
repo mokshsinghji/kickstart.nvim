@@ -193,9 +193,8 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
+    main = "ibl",
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
     },
   },
   -- "gc" to comment visual regions/lines
@@ -283,26 +282,26 @@ require('lazy').setup({
   },
   {
     "zbirenbaum/copilot-cmp",
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
     end,
   },
   {
     'nvim-telescope/telescope-ui-select.nvim',
-  }
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
-
+  -- require 'custom.plugins'
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 
   -- PLUGINS END
 }, {})
@@ -349,6 +348,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -363,10 +365,10 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>fb', ":Telescope file_browser<CR>", { noremap = true })
 
 -- Mapping for Smart-Splits move up and down window
-vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
-vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
-vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
-vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+vim.keymap.set('n', '<leader>h', require('smart-splits').move_cursor_left)
+vim.keymap.set('n', '<leader>j', require('smart-splits').move_cursor_down)
+vim.keymap.set('n', '<leader>k', require('smart-splits').move_cursor_up)
+vim.keymap.set('n', '<leader>l', require('smart-splits').move_cursor_right)
 vim.keymap.set("n", "<C-Up>", function() require("smart-splits").resize_up() end)
 vim.keymap.set("n", "<C-Down>", function() require("smart-splits").resize_down() end)
 vim.keymap.set("n", "<C-Left>", function() require("smart-splits").resize_left() end)
