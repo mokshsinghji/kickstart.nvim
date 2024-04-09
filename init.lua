@@ -204,6 +204,8 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
+    lazy = true,
+    cmd = 'Telescope',
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -214,11 +216,19 @@ require('lazy').setup({
         -- NOTE: If you are having trouble with this installation,
         --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
+        lazy = true,
+        cmd = 'Telescope',
         cond = function()
           return vim.fn.executable 'make' == 1
         end,
       },
     },
+    config = function(plugin, opts)
+      require('telescope').setup(opts)
+      pcall(require('telescope').load_extension, 'fzf')
+      -- pcall(require('telescope').load_extension, 'file_browser')
+      pcall(require('telescope').load_extension, 'ui-select')
+    end,
     opts = {
       extensions = {
         file_browser = {
@@ -231,6 +241,14 @@ require('lazy').setup({
             },
             ["n"] = {
               ["<space>fb"] = { ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true }, }
+            },
+          },
+        },
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-u>'] = false,
+              ['<C-d>'] = false,
             },
           },
         },
@@ -288,6 +306,8 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope-ui-select.nvim',
+    lazy = true,
+    cmd = 'Telescope',
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -388,31 +408,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown({
-        winblend = 10,
-        previewer = false,
-      }),
-    },
-  },
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
--- pcall(require('telescope').load_extension, 'file_browser')
-pcall(require('telescope').load_extension, 'ui-select')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
