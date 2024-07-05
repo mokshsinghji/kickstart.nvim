@@ -12,4 +12,5 @@ return {
     require 'custom.plugins.hover',
     require 'custom.plugins.autoclose',
     require 'custom.plugins.zellij-nav',
+    require 'custom.plugins.harpoon',
 }

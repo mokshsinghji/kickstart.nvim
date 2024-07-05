@@ -293,7 +293,7 @@ require('lazy').setup({
         auto_trigger = true,
         enabled = true,
         keymap = {
-          accept = "<C-a>",
+          accept = "<Tab>",
         },
       },
     },
@@ -395,7 +395,10 @@ vim.keymap.set("n", "<C-Left>", function() require("smart-splits").resize_left()
 vim.keymap.set("n", "<C-Right>", function() require("smart-splits").resize_right() end)
 
 -- Mapping for oil.nvim
-vim.keymap.set("n", "<leader>of", function() require("oil").toggle_float() end)
+vim.keymap.set("n", "<leader>of", function() require("oil").toggle_float() end, { desc = "Toggle Oil Browser" })
+
+-- Misc mappings
+vim.keymap.set('n', "<C-a>", "gg0VG$", { noremap = true }) -- Select all
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
